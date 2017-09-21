@@ -83,6 +83,14 @@ class MainFragment : Fragment() {
                 }
             }
         }
+
+        if (isGranted && !isRegister){
+            val serviceIntent = Intent(activity, ForwardService::class.java)
+            serviceIntent.action = REGISTER_RECEIVER
+            mBinding.btnServiceSwitch.text = getString(R.string.turn_off_service)
+            activity.startService(serviceIntent)
+            isRegister = true
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
